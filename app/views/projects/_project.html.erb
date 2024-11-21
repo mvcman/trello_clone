@@ -1,0 +1,9 @@
+<%= turbo_frame_tag dom_id(project), class: "p-4 bg-emerald-200" do %>
+    <p class="text-emarald-600 font-bold uppercase text-md"><%= project.name %></p>
+    <p class="text-emarald-400 text-sm"><%= project.description %></p>
+    <div class="flex items-center space-x-2">
+        <%= link_to "View", project_path(project), data: { turbo: false }, class: "block" %>
+        <%= link_to "Edit project", edit_project_path(project), data: { turbo_frame: :remote_modal }, class: "cursor-pointer font-medium text-black text-md py-1" %>
+        <%= button_to "Destroy", project_path(project), method: :delete, class: "py-1 px-4 border border-red-600 bg-red-600 text-sm sm:text-md text-white rounded-md font-inter font-medium cursor-pointer" %>
+    </div>
+<% end %>

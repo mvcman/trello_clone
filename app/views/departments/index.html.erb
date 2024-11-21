@@ -1,0 +1,11 @@
+<div>
+  <h1 class="font-bold text-4xl">Departments#index</h1>
+  <p>Find me in app/views/departments/index.html.erb</p>
+  <div class="w-full mx-20 grid grid-cols-3 gap-4">
+    <% @departments.each do |department| %>
+      <%= render department %>
+    <% end %>
+  </div>
+</div>
+
+<%= render "timeline" %>

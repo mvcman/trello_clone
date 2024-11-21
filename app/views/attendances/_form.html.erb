@@ -1,0 +1,14 @@
+<%= form_with(model: [user, attendance], class: "") do |form| %>
+    <div class="my-2">
+        <%= form.datetime_local_field :check_in_time, class: "" %>
+    </div>
+    <div class="my-2">
+        <%= form.datetime_local_field :check_out_time, class: "" %>
+    </div>
+    <div class="my-2">
+        <%= form.select :attendance_status_id, AttendanceStatus.all.map {|a| [a.name, a.id]}, class: "" %>
+    </div>
+    <div class="my-2">
+        <%= form.submit "Create", class: "" %>
+    </div>
+<% end %>

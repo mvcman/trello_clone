@@ -1,0 +1,13 @@
+<div>
+  <h1 class="font-bold text-4xl"><%= @department.name %></h1>
+  <p>Department Employees</p>
+  <div class="flex flex-col gap-2 p-4">
+    <% @department.user_departments.each do |u| %>
+      <div class="">
+        <%= link_to u.user.first_name, user_path(u.user), class: "" %></p>
+        <%= link_to "add leave", new_user_leaf_path(u.user), class: "" %></p>
+        <%= link_to "add attendance", new_user_attendance_path(u.user), class: "" %></p>
+      </div>
+    <% end %>
+  </div>
+</div>

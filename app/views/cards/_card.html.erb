@@ -1,0 +1,25 @@
+<%= turbo_frame_tag dom_id(card), class: "p-2 bg-gray-50 shadow-md border border-gray-200 rounded-md flex flex-col" do %>
+    <div class="grid grid-cols-[1fr,auto] gap-2">
+        <div class="w-full truncate">
+            <p class="font-bold text-md"><%= card.title %></p>
+            <p class="font-normal text-base text-gray-600"><%= card.description %></p>
+        </div>
+        <div class="h-8 w-8 rounded-full text-gray-600 flex items-center justify-center cursor-pointer" data-popover-target="<%= card.id %>_popover_click" data-popover-trigger="click" data-popover-placement="bottom">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 256 256"><path fill="currentColor" d="M144 128a16 16 0 1 1-16-16a16 16 0 0 1 16 16m-84-16a16 16 0 1 0 16 16a16 16 0 0 0-16-16m136 0a16 16 0 1 0 16 16a16 16 0 0 0-16-16"/></svg>
+        </div>
+        <div class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 p-4" data-popover id="<%= card.id %>_popover_click" role="tooltip">
+            <div class="flex flex-col">
+                <p class="font-bold text-black text-md"><%= card.title %></p>
+                <p class="text-gray-600 text-base"><%= card.description %></p>
+            </div>
+            <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
+            <%= link_to "Edit card", edit_project_column_card_path(card.column.project, card.column, card), data: { turbo_frame: :remote_modal }, class: "cursor-pointer font-medium text-black text-md py-1" %>
+            <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
+            <%= button_to "Destroy", project_column_card_path(card.column.project, card.column, card), method: :delete, class: "py-1 px-4 border border-red-600 bg-red-600 text-sm sm:text-md text-white rounded-md font-inter font-medium cursor-pointer" %>
+            <div data-popper-arrow></div>
+        </div>
+    </div>
+    <div class="mt-2">
+        <p class="text-gray-400 text-sm">By <%= card.user.full_name %></p>
+    </div>
+<% end %>

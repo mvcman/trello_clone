@@ -1,0 +1,75 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+
+ .gray {
+    background-color: #cbd5e1;
+ }
+
+ .zinc {
+    background-color: #d4d4d8;
+ }
+
+ .stone {
+    background-color: #d6d3d1;
+ }
+
+ .rose {
+    background-color: #fecaca;
+ }
+
+ .yellow {
+    background-color: #fef08a;
+ }
+ .orange {
+    background-color: #fed7aa;
+ }
+ .green {
+    background-color: #d1fae5;
+ }
+
+ .cyan {
+    background-color: #a5f3fc;
+ }
+
+ .purple {
+    background-color: #e9d5ff;
+ }
+
+
+dialog {
+   width: 40vw;
+   margin: auto;
+   padding: 20px;
+   border-radius: 10px;
+ }
+
+ dialog::backdrop {
+   background: rgb(0, 0, 0);
+   opacity: 0.2;
+ }
+
+ dialog > header {
+   display: flex;
+   align-items: center;
+   
+ }
+
+ dialog > header > h2 {
+   flex: 0 1 100%;
+ }
+
+

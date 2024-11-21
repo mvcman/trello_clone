@@ -1,0 +1,65 @@
+<%= turbo_frame_tag "attendance" do %>
+    <div class="flex items-center justify-between h-12 bg-blue-100">
+      <div class="pl-2">
+        <p class="relative">Current Status: <span><%= get_current_status(@holidays, @leaves, @attendances, Time.zone.today) %></span></p>
+      </div>
+      <div class="flex items-center pr-2 space-x-0">
+        <%= link_to "Current Month", user_path(@user, date: Time.zone.today.beginning_of_month), class: is_active?(params[:date], Time.zone.today.month) ? "p-2 text-xs text-white bg-blue-500 m-0 rounded-l-md" : "p-2 text-xs text-blue-500 bg-white m-0 rounded-l-md" %>
+        <%= link_to "#{DateTime::MONTHNAMES[Time.zone.today.month - 1]}", user_path(@user, date: (Time.zone.today - 1.month).beginning_of_month), class: is_active?(params[:date], Time.zone.today.month - 1) ? "p-2 text-xs text-white bg-blue-500 m-0" : "p-2 text-xs text-blue-500 bg-white m-0" %>
+        <%= link_to "#{DateTime::MONTHNAMES[Time.zone.today.month - 2]}", user_path(@user, date: (Time.zone.today - 2.month).beginning_of_month), class: is_active?(params[:date], Time.zone.today.month - 2) ? "p-2 text-xs text-white bg-blue-500 rounded-r-md" : "p-2 text-xs text-blue-500 bg-white rounded-r-md" %>
+      </div>
+      <%
+=begin%>
+ <div class="flex items-center pr-2 space-x-0">
+        <%= link_to "Current Month", attendance_users_path(id: @user.id , date: Time.zone.today.beginning_of_month), class: is_active?(params[:date], Time.zone.today.month) ? "p-2 text-xs text-white bg-blue-500 m-0 rounded-l-md" : "p-2 text-xs text-blue-500 bg-white m-0 rounded-l-md" %>
+        <%= link_to "#{DateTime::MONTHNAMES[Time.zone.today.month - 1]}", attendance_users_path(id: @user.id, date: (Time.zone.today - 1.month).beginning_of_month), class: is_active?(params[:date], Time.zone.today.month - 1) ? "p-2 text-xs text-white bg-blue-500 m-0" : "p-2 text-xs text-blue-500 bg-white m-0" %>
+        <%= link_to "#{DateTime::MONTHNAMES[Time.zone.today.month - 2]}", attendance_users_path(id: @user.id, date: (Time.zone.today - 2.month).beginning_of_month), class: is_active?(params[:date], Time.zone.today.month - 2) ? "p-2 text-xs text-white bg-blue-500 rounded-r-md" : "p-2 text-xs text-blue-500 bg-white rounded-r-md" %>
+      </div> 
+<%
+=end%>
+    </div>
+    <table class="w-full border border-gray-200">
+        <thead class="h-12">
+            <tr class="w-full bg-blue-400 text-white font-bold uppercase text-xs">
+                
+                <%
+=begin%>
+ <th scope="col" class="text-left w-auto px-2">Status</th>  
+<%
+=end%>
+                <th scope="col" class="text-left w-auto px-2">Date</th>
+                <th scope="col" class="text-left w-20">Day</th>
+                
+                <th scope="col" class="text-left w-32">Check in</th>
+                <th scope="col" class="text-left w-32">Check out</th>
+                <th scope="col" class="text-left w-32">Effective hours</th>
+            </tr>
+        </thead>
+        <tbody class="">
+            <% date_range.each_with_index do |date, i| %>
+                <% attend = get_attendance(attendances, date) %>
+                <%
+=begin%>
+ <tr class="w-full h-12 border-b border-gray-200 <%= "bg-indigo-50" if !["Mon", "Tue", "Wed", "Thu", "Fri"].map {|d| d.downcase }.include?(date.strftime("%a").downcase) %> <%= "bg-yellow-50"  if is_holiday(holidays, date) %> <%= "bg-red-50" if is_leave(leaves, date) %>"> 
+<%
+=end%>
+                <tr class="w-full h-12 border-b border-gray-200">
+                    
+                    <%
+=begin%>
+ <td class="text-left w-20 relative">
+                        <div class="absolute left-4 top-2 w-8 h-8 rounded-full bg-green-600 before:content-[''] before:absolute before:w-1 before:h-4 before:bg-gray-400 before-top-4 after:content-[''] after:absolute after:w-1 after:h-4 after:bg-gray-400 after-bottom-4"></div>
+                    </td>  
+<%
+=end%>
+                    <td class="text-left flex items-center space-x-2 h-12 w-auto pl-2"><%= date.strftime("%B %d") %><%= get_holiday_tag if is_holiday(holidays, date) %><%= get_leave_tag(leaves, date) if is_leave(leaves, date) %>
+                    <%= get_weekday_tag if !["Mon", "Tue", "Wed", "Thu", "Fri"].map {|d| d.downcase }.include?(date.strftime("%a").downcase) %><%= get_attendance_tag(attend[0]) if attend[0].present? %></td>
+                    <td class="text-left w-20"><%= date.strftime("%a") %></td>
+                    <td class="text-left w-20"><%= attend[1] %></td>
+                    <td class="text-left w-20"><%= attend[2] %></td>
+                    <td class="text-left w-20 pr-2"><%= attend[3] %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+<% end %>

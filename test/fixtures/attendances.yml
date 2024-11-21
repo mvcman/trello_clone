@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  attendance_status: one
+  check_in_time: 2024-08-22 14:08:40
+  check_out_time: 2024-08-22 14:08:40
+
+two:
+  user: two
+  attendance_status: two
+  check_in_time: 2024-08-22 14:08:40
+  check_out_time: 2024-08-22 14:08:40

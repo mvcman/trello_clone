@@ -1,0 +1,14 @@
+<div class="p-4">
+  <h1 class="font-bold text-4xl"><%= @project.name %></h1>
+  
+  <div class="w-full bg-yellow-50 py-4 px-8 border border-gray-200 flex flex-row gap-2">
+    <%= turbo_frame_tag dom_id(@project), class: "flex flex-row gap-4 overflow-x-auto" do %>
+      <% @project.columns.ordered.each do |column| %>
+        <%= render column %>
+      <% end %>
+    <% end %>
+    <%= link_to new_project_column_path(@project), data: { turbo_frame: :remote_modal}, class: "bg-emerald-600 text-white rounded-full p-1 self-start w-8 h-8 flex items-center justify-center" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24"><path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>
+    <% end %>
+  </div>
+</div>

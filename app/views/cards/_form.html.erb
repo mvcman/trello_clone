@@ -1,0 +1,8 @@
+<%= form_with(model: [column.project, column, card], class: "flex flex-col space-y-2") do |form|%>
+    <%= form.text_field :title, placeholder: "Title", class: "p-2 w-full border border-gray-200 rounded-md" %>
+    <%= form.text_area :description, placeholder: "Description", class: "p-2 w-full border border-gray-200 rounded-md" %>
+    <div class="flex space-x-2 items-center">
+        <%= form.submit "Save", data: { action: "click->modal#close" }, class: "py-1 px-4 border border-emerald-600 bg-emerald-600 text-sm sm:text-md text-white rounded-md font-inter font-medium cursor-pointer" %>
+        <%= form.button "Close", value: nil, formmethod: :dialog, class: "py-1 px-4 border border-emerald-600 text-emerald-600 text-sm sm:text-md rounded-md font-inter font-medium cursor-pointer" %>
+    </div>
+<% end %>

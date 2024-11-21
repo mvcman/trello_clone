@@ -1,0 +1,4 @@
+<%= link_to department_path(department), class: "flex flex-col bg-gray-200 p-4 rounded-lg" do %>
+    <h2><%= department.name %></h2>
+    <p><%= department.user_departments.count %></p>
+<% end %>

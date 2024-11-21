@@ -1,0 +1,21 @@
+<div class="bg-gray-100 space-y-4 p-4">
+  <h1 class="font-bold text-4xl">Users#show</h1>
+  <div class="grid grid-cols-3 gap-4">
+    <div class="flex flex-col">
+      <h2 class="">Attendance Stats</h2>
+      <div class="w-full p-4 border border-gray-200 rounded-md bg-white"></div>
+    </div>
+    <div class="flex flex-col">
+      <h2 class="">Timings</h2>
+      <div class="w-full p-4 border border-gray-200 rounded-md bg-white"></div>
+    </div>
+    <div class="flex flex-col">
+      <h2 class="">Actions</h2>
+      <div class="w-full p-4 border border-gray-200 rounded-md bg-white"></div>
+    </div>
+  </div>
+  <div class="overflow-y-auto">
+    <h2>Logs</h2>
+    <%= render "attendance", date_range: @date_range, holidays: @holidays, leaves: @leaves, attendances: @attendances %>
+  </div>
+</div>
